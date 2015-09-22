@@ -11,10 +11,23 @@
     </head>
 
     <body>
+        <!-- ko with: selectedSystem() -->
+            <section id="system" data-bind="style : { backgroundImage : cssBackgroundUrl() }">
 
+            </section>
+        <!-- /ko -->
 
     	<script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/knockout/dist/knockout.js"></script>
         <script src="js/frontend.js"></script>
+
+        <script>
+            $(function()
+            {
+                var frontend = new classFrontend();
+
+                ko.applyBindings(frontend);
+            });
+        </script>
     </body>
 </html>
