@@ -77,8 +77,6 @@ var classFrontend = function()
         {
             self.fnPrevGame();
         }
-
-        console.log(String(event.keyCode));
     }
 
 

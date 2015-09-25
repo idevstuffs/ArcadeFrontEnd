@@ -28,7 +28,7 @@
                 <section id="system-body">
                     <section id="system-games" data-bind="style : { marginLeft : $root.gamesOffset() }">
                         <!-- ko foreach: games() -->
-                            <div class="system-game">
+                            <div class="system-game" data-bind="css : { active : $index() == $root.selectedGameIndex() }">
                                 <img data-bind="attr : { src : imageUrl() }" class="system-game-image">
                             </div>
                         <!-- /ko -->
