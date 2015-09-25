@@ -24,5 +24,62 @@ body {
 
     background-repeat: no-repeat;
     background-color: #000000;
-    background-size: 100% 100%;s
+    background-size: 100% 100%;
+}
+
+#system #system-header {
+    padding: 0px 3vh;
+    height: 19vh;
+    padding-top: 2vh;
+
+
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.5)), color-stop(100%,rgba(0,0,0,0.2)));
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.2) 100%);
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.2) 100%);
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.2) 100%);
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.2) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#33000000',GradientType=0 );
+}
+
+#system #system-name {
+    margin: 0px;
+    padding: 0px;
+    font-size: 5vh;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 3px;
+}
+
+#system #system-info {
+    font-size: 2vh;
+    color: #FFFFFF;
+    margin-top: 3vh;
+    text-shadow: rgba(0, 0, 0, .5) 0px 1px 3px;
+}
+
+#system #system-body {
+    top: 19vh;
+    width: 100%;
+    position: fixed;
+    height: calc(100% - 14vw);
+}
+
+#system #system-body #system-games {
+    width: 400vw;
+    margin-top: 14vh;
+    margin-left: calc(50vw - 12.5vw);
+
+    transition: all 300ms ease-in-out;
+}
+
+#system #system-body #system-games .system-game {
+    margin-right: 10vw;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#system #system-body #system-games .system-game .system-game-image {
+    width: 25vw;
+    height: 45vh;
+    box-shadow: rgba(0, 0, 0, .5) 0px 2vw 10vh;
 }

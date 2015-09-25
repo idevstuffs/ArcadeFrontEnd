@@ -13,7 +13,27 @@
     <body>
         <!-- ko with: selectedSystem() -->
             <section id="system" data-bind="style : { backgroundImage : cssBackgroundUrl() }">
+                <section id="system-header">
+                    <h1 id="system-name" data-bind="text : name()"></h1>
 
+                    <div id="system-info">
+                        <strong>Year Released:</strong> <span data-bind="text : year()"></span>
+
+                        <br>
+
+                        <strong>Tech:</strong> <span data-bind="text : bits()"></span>
+                    </div>
+                </section>
+
+                <section id="system-body">
+                    <section id="system-games" data-bind="style : { marginLeft : $root.gamesOffset() }">
+                        <!-- ko foreach: games() -->
+                            <div class="system-game">
+                                <img data-bind="attr : { src : imageUrl() }" class="system-game-image">
+                            </div>
+                        <!-- /ko -->
+                    </section>
+                </section>
             </section>
         <!-- /ko -->
 
