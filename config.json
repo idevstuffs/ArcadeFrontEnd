@@ -1,0 +1,17 @@
+{
+    "keys" : {
+        "prev" : 37,
+        "next" : 39,
+        "select" : 13,
+        "quit" : 27
+    },
+    "systems" : [
+        {
+            "code" : "nes",
+            "year" : "1985",
+            "bits" : "8-Bit",
+            "name" : "Nintendo Entertainment System",
+            "command" : "fceux {game} -f 1 --autoscale 1"
+        }
+    ]
+}

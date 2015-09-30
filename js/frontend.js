@@ -1,5 +1,6 @@
 var gui = require('nw.gui');
 var fs = require('fs');
+var proc = require('child_process');
 
 var closeShortcut = new gui.Shortcut(
 {
@@ -20,17 +21,9 @@ var classFrontend = function()
 
     self.title = ko.observable('merp');
 
+    self.config = ko.observable();
     self.systems = ko.observableArray();
     self.selectedSystem = ko.observable();
-
-    self.systems.push(new classSystem(self, self,
-    {
-        'code' : 'nes',
-        'year' : '1985',
-        'bits' : '8-Bit',
-        'name' : 'Nintendo Entertainment System'
-    }));
-
     self.selectedGameIndex = ko.observable(0);
 
 
@@ -38,6 +31,27 @@ var classFrontend = function()
     {
         return ((35 * (self.selectedGameIndex() * -1)) + 37.5) + 'vw';
     });
+
+
+    self.loadConfig = function()
+    {
+        fs.readFile('config.json', function(error, data)
+        {
+            var config = JSON.parse(data);
+
+            if (config.hasOwnProperty('systems'))
+            {
+                config.systems.forEach(function(system)
+                {
+                    self.systems.push(new classSystem(self, self, system));
+                });
+
+                self.selectedSystem(self.systems()[0]);
+            }
+
+            self.config(config);
+        });
+    };
 
 
     self.fnNextGame = function()
@@ -60,30 +74,40 @@ var classFrontend = function()
 
     self.keyPressed = function(event)
     {
-        //Escape Key
-        if (event.keyCode == 27)
+        //Quit Frontend
+        if (event.keyCode == self.config().keys.quit)
         {
             gui.App.quit();
         }
 
-        //Left Arrow Key
-        if (event.keyCode == 37)
+        //Next Game
+        if (event.keyCode == self.config().keys.next)
         {
             self.fnNextGame();
         }
 
-        //Right Arrow Key
-        if (event.keyCode == 39)
+        //Prev Game
+        if (event.keyCode == self.config().keys.prev)
         {
             self.fnPrevGame();
+        }
+
+        //Select Game
+        if (event.keyCode == self.config().keys.select)
+        {
+            var command = self.selectedSystem().command();
+
+            var game = '"systems/' + self.selectedSystem().code() + '/roms/' + self.selectedSystem().games()[self.selectedGameIndex()].filename() + '"';
+
+            var p = proc.exec(command.replace('{game}', game));
         }
     }
 
 
     self.init = function()
     {
-        //Select first system
-        self.selectedSystem(self.systems()[0]);
+        //Load Config
+        self.loadConfig();
 
         //Register any events
         document.addEventListener('keydown', self.keyPressed, false);
@@ -102,6 +126,7 @@ var classSystem = function(root, parent, system)
     self.name = ko.observable(system.name);
     self.year = ko.observable(system.year);
     self.bits = ko.observable(system.bits);
+    self.command = ko.observable(system.command);
 
     self.games = ko.observableArray();
 
